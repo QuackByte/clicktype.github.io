@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// Served as a GitHub Pages project site: https://quackbyte.dev/clicktype/
+// Served by the Quackbyte org site at https://quackbyte.dev/clicktype/
 export default defineConfig({
   site: 'https://quackbyte.dev',
   base: '/clicktype',

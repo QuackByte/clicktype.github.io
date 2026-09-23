@@ -37,23 +37,18 @@ Requires Node 22.12 or later.
 
 ## Deploy
 
-1. Create a repo named **`clicktype`** under the Quackbyte account/org and push:
-   ```sh
-   git remote add origin git@github.com:<quackbyte-account>/clicktype.git
-   git push -u origin main
-   ```
-2. In the repo: **Settings › Pages › Build and deployment › Source: GitHub Actions**.
-3. Every push to `main` builds and deploys via `.github/workflows/deploy.yml`.
+This repo (`QuackByte/clicktype.github.io`) is not its own GitHub Pages site. The org site
+`QuackByte/quackbyte.github.io` checks it out, builds it with `base: /clicktype`, and copies
+`dist/` into `public/clicktype/` before deploying to **quackbyte.dev**. This mirrors how
+`quacktop.github.io` and `quackbit.github.io` are published.
 
-### How it ends up on quackbyte.dev/clicktype
-
-A project repo named `clicktype` is served at `<account>.github.io/clicktype/`. If the
-account's user/org site (`<account>.github.io` repo) has the custom domain `quackbyte.dev`,
-GitHub serves every project site under it automatically, so this one appears at
-`quackbyte.dev/clicktype/`. No `CNAME` file is needed in this repo.
-
-If quackbyte.dev is hosted somewhere else, either proxy/redirect `/clicktype/` to the
-GitHub Pages URL, or change `site`/`base` in `astro.config.mjs` to match where it lives.
+- Pushes here only run `.github/workflows/check.yml` (type-check + build).
+- To publish a change, push here, then re-run the org site's **Deploy to GitHub Pages**
+  workflow (or push to `quackbyte.github.io`):
+  ```sh
+  gh workflow run deploy.yml -R QuackByte/quackbyte.github.io
+  ```
+- This repo must stay public: the org workflow checks it out without a token.
 
 ## App Store Connect
 
