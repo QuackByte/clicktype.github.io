@@ -4,37 +4,67 @@ import type { Lang } from '../i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 
-const snippets = lang === 'es'
+const clips = lang === 'es'
   ? [
       { label: 'Email', text: 'alex@example.com' },
       { label: 'Dirección', text: 'Calle Larios 12, 29005 Málaga' },
-      { label: 'Respuesta', text: 'Gracias por escribir. Te respondo en un día laborable.' },
+      { label: 'Comando', text: 'ssh admin@192.168.1.20' },
     ]
   : [
       { label: 'Email', text: 'alex@example.com' },
       { label: 'Address', text: 'Calle Larios 12, 29005 Málaga' },
-      { label: 'Reply', text: 'Thanks for reaching out. I’ll get back to you within one business day.' },
+      { label: 'Command', text: 'ssh admin@192.168.1.20' },
     ];
 
 const t = lang === 'es'
-  ? { field: 'Un campo de texto en cualquier app', hint: 'Prueba: haz clic en un fragmento.', clear: 'Borrar', group: 'Fragmentos de ejemplo' }
-  : { field: 'A text field in any app', hint: 'Try it: click a snippet.', clear: 'Clear', group: 'Example snippets' };
+  ? {
+      field: 'Un campo de texto en cualquier app',
+      hint: 'Prueba: copia un ejemplo y haz clic en la tecla de la barra de menús.',
+      clear: 'Borrar',
+      group: 'Texto de ejemplo para copiar',
+      copy: 'Copiar',
+      clipboard: 'Portapapeles',
+      icon: 'ClickType: teclear el portapapeles',
+    }
+  : {
+      field: 'A text field in any app',
+      hint: 'Try it: copy an example, then click the keycap in the menu bar.',
+      clear: 'Clear',
+      group: 'Example text to copy',
+      copy: 'Copy',
+      clipboard: 'Clipboard',
+      icon: 'ClickType: type the clipboard',
+    };
 ---
 <div class="demo" data-demo>
-  <div class="demo-window">
-    <div class="demo-bar">
-      <span class="demo-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-      <span class="demo-title">{t.field}</span>
-      <button type="button" class="demo-clear" data-clear>{t.clear}</button>
+  <div class="demo-screen">
+    <div class="menubar">
+      <button type="button" class="menubar-icon" data-type aria-label={t.icon} title={t.icon}>
+        <svg viewBox="0 0 18 18" width="18" height="18" aria-hidden="true">
+          <rect x="1.5" y="2" width="15" height="14" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.5" />
+          <rect x="4.5" y="4.5" width="9" height="7.5" rx="2" fill="currentColor" />
+        </svg>
+      </button>
+      <span class="menubar-clock" aria-hidden="true">9:41</span>
     </div>
-    <p class="demo-field" data-output aria-live="polite"><span data-text></span><span class="caret" aria-hidden="true"></span></p>
+    <div class="demo-window">
+      <div class="demo-bar">
+        <span class="demo-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="demo-title">{t.field}</span>
+        <button type="button" class="demo-clear" data-clear>{t.clear}</button>
+      </div>
+      <p class="demo-field" data-output aria-live="polite"><span data-text></span><span class="caret" aria-hidden="true"></span></p>
+    </div>
   </div>
   <p class="demo-hint">{t.hint}</p>
-  <div class="keys" role="group" aria-label={t.group}>
-    {snippets.map((s) => (
-      <button type="button" class="key" data-snippet={s.text}>{s.label}</button>
+  <div class="clips" role="group" aria-label={t.group}>
+    {clips.map((c, i) => (
+      <button type="button" class="clip" data-clip={c.text} aria-pressed={i === 0 ? 'true' : 'false'}>
+        <span class="clip-verb">{t.copy}</span> {c.label}
+      </button>
     ))}
   </div>
+  <p class="clipboard">{t.clipboard}: <code data-clipboard>{clips[0].text}</code></p>
 </div>
 
 <script>
@@ -43,7 +73,10 @@ const t = lang === 'es'
   for (const demo of document.querySelectorAll<HTMLElement>('[data-demo]')) {
     const out = demo.querySelector<HTMLElement>('[data-text]');
     const field = demo.querySelector<HTMLElement>('[data-output]');
-    if (!out || !field) continue;
+    const board = demo.querySelector<HTMLElement>('[data-clipboard]');
+    if (!out || !field || !board) continue;
+    const clips = demo.querySelectorAll<HTMLButtonElement>('[data-clip]');
+    let clipboard = board.textContent ?? '';
     let run = 0;
 
     const type = async (text: string) => {
@@ -63,9 +96,14 @@ const t = lang === 'es'
       if (id === run) field.classList.remove('is-typing');
     };
 
-    demo.querySelectorAll<HTMLButtonElement>('[data-snippet]').forEach((btn) =>
-      btn.addEventListener('click', () => type(btn.dataset.snippet ?? '')),
+    clips.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        clipboard = btn.dataset.clip ?? '';
+        board.textContent = clipboard;
+        clips.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      }),
     );
+    demo.querySelector('[data-type]')?.addEventListener('click', () => type(clipboard));
     demo.querySelector('[data-clear]')?.addEventListener('click', () => {
       run++;
       out.textContent = '';

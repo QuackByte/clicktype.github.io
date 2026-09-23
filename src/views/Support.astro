@@ -22,16 +22,24 @@ const mail = `mailto:${owner.email}?subject=${encodeURIComponent(app.name + (lan
       <p>Open System Settings, go to <span class="path">Privacy &amp; Security › Accessibility</span> and turn on {app.name}. If it’s already on but typing doesn’t work, turn it off and on again, then relaunch {app.name}.</p>
     </details>
     <details>
-      <summary>I clicked a snippet and nothing was typed.</summary>
-      <p>{app.name} types into whatever has keyboard focus. Click into the text field first so the cursor is blinking there, then click your snippet. Also check that the Accessibility permission above is on.</p>
+      <summary>I clicked the icon and nothing was typed.</summary>
+      <p>{app.name} types into whatever has keyboard focus. Click into the text field first so the cursor is blinking there, then click the {app.name} icon in the menu bar. Check that the clipboard holds text: images, files and other non-text items are ignored. Also check that the Accessibility permission above is on.</p>
+    </details>
+    <details>
+      <summary>Some apps or fields don’t receive the text.</summary>
+      <p>{app.name} sends the text as simulated keystrokes. Password and other secure fields, and some apps with elevated privileges, reject simulated typing by design. In those cases paste or type the text yourself.</p>
+    </details>
+    <details>
+      <summary>How do I start {app.name} at login, or quit it?</summary>
+      <p>Right-click (or Option-click) the {app.name} icon in the menu bar. The menu has Run at Login, the Accessibility settings and Quit.</p>
     </details>
     <details>
       <summary>Is my text sent anywhere?</summary>
-      <p>No. Snippets stay on your Mac and the app makes no network connections. The <a href={href('privacy', 'en')}>privacy policy</a> has the details.</p>
+      <p>No. {app.name} reads the clipboard only when you click its icon, types it and keeps no copy. The app makes no network connections. The <a href={href('privacy', 'en')}>privacy policy</a> has the details.</p>
     </details>
     <details>
       <summary>How do I remove {app.name} and its data?</summary>
-      <p>Quit the app and move it from Applications to the Bin. Its snippets and settings are removed with it. You can also remove it from the Accessibility list in System Settings.</p>
+      <p>Quit the app and move it from Applications to the Bin. It keeps no copy of your clipboard, so there’s nothing else to delete. You can also remove it from the Accessibility list in System Settings.</p>
     </details>
     <details>
       <summary>How do I get a refund?</summary>
@@ -53,16 +61,24 @@ const mail = `mailto:${owner.email}?subject=${encodeURIComponent(app.name + (lan
       <p>Abre Ajustes del Sistema, ve a <span class="path">Privacidad y seguridad › Accesibilidad</span> y activa {app.name}. Si ya está activado pero no escribe, desactívalo y vuelve a activarlo, y abre {app.name} de nuevo.</p>
     </details>
     <details>
-      <summary>He hecho clic en un fragmento y no se ha escrito nada.</summary>
-      <p>{app.name} escribe donde esté el foco del teclado. Haz clic primero en el campo de texto para que el cursor parpadee ahí y luego en el fragmento. Comprueba también que el permiso de Accesibilidad está activado.</p>
+      <summary>He hecho clic en el icono y no se ha escrito nada.</summary>
+      <p>{app.name} escribe donde esté el foco del teclado. Haz clic primero en el campo de texto para que el cursor parpadee ahí y luego en el icono de {app.name} en la barra de menús. Comprueba que el portapapeles contiene texto: las imágenes, los archivos y otros elementos que no son texto se ignoran. Comprueba también que el permiso de Accesibilidad está activado.</p>
+    </details>
+    <details>
+      <summary>Algunas apps o campos no reciben el texto.</summary>
+      <p>{app.name} envía el texto como pulsaciones de teclado simuladas. Los campos de contraseña y otros campos seguros, y algunas apps con privilegios elevados, rechazan el tecleo simulado por diseño. En esos casos pega o escribe el texto tú.</p>
+    </details>
+    <details>
+      <summary>¿Cómo hago que {app.name} se abra al iniciar sesión, o cómo la cierro?</summary>
+      <p>Haz clic con el botón derecho (o con Opción) en el icono de {app.name} en la barra de menús. El menú incluye Abrir al iniciar sesión, los ajustes de Accesibilidad y Salir.</p>
     </details>
     <details>
       <summary>¿Se envía mi texto a algún sitio?</summary>
-      <p>No. Los fragmentos se quedan en tu Mac y la app no se conecta a internet. Tienes los detalles en la <a href={href('privacy', 'es')}>política de privacidad</a>.</p>
+      <p>No. {app.name} lee el portapapeles solo cuando haces clic en su icono, lo teclea y no guarda ninguna copia. La app no se conecta a internet. Tienes los detalles en la <a href={href('privacy', 'es')}>política de privacidad</a>.</p>
     </details>
     <details>
       <summary>¿Cómo elimino {app.name} y sus datos?</summary>
-      <p>Cierra la app y arrástrala de Aplicaciones a la Papelera. Sus fragmentos y ajustes se eliminan con ella. También puedes quitarla de la lista de Accesibilidad en Ajustes del Sistema.</p>
+      <p>Cierra la app y arrástrala de Aplicaciones a la Papelera. No guarda ninguna copia de tu portapapeles, así que no hay nada más que borrar. También puedes quitarla de la lista de Accesibilidad en Ajustes del Sistema.</p>
     </details>
     <details>
       <summary>¿Cómo pido un reembolso?</summary>

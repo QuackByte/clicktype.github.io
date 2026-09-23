@@ -11,13 +11,15 @@ const mail = `mailto:${owner.email}`;
 ---
 {lang === 'en' ? (
 <Base lang="en" route="privacy" title="Privacy policy | ClickType" description="How ClickType and this website handle your data: the app collects none.">
-  <Prose title="Privacy policy" updated={`Last updated ${date}`} intro={`${app.name} doesn’t collect, store or share any personal data. Everything you create in the app stays on your Mac.`}>
+  <Prose title="Privacy policy" updated={`Last updated ${date}`} intro={`${app.name} doesn’t collect, store or share any personal data. What’s on your clipboard stays on your Mac.`}>
     <h2>Who is responsible</h2>
     <p>{app.name} is made by {owner.legalName}, trading as {owner.brand}, {owner.address}, tax ID {owner.taxId}. For any privacy question or request, write to <a href={mail}>{owner.email}</a>.</p>
 
     <h2>The {app.name} app</h2>
+    <h3>How the app uses your clipboard</h3>
+    <p>{app.name} reads the plain text on your clipboard only at the moment you click its menu bar icon. It types that text into the app you’re using and then discards it. It doesn’t keep a copy or a history, and it doesn’t watch the clipboard in the background. Non-text items such as images are ignored.</p>
     <h3>What the app stores</h3>
-    <p>The snippets and settings you create are saved only on your Mac, inside the app’s own storage. They are never uploaded to us or to anyone else. Deleting the app deletes them.</p>
+    <p>Only its own preferences, such as whether to run at login. They stay on your Mac.</p>
     <h3>What the app doesn’t do</h3>
     <ul>
       <li>It doesn’t collect personal data, usage data or identifiers.</li>
@@ -26,7 +28,7 @@ const mail = `mailto:${owner.email}`;
       <li>It doesn’t record, read or log what you type on your keyboard.</li>
     </ul>
     <h3>Accessibility permission</h3>
-    <p>To type text into other apps, macOS requires you to allow {app.name} under Accessibility in System Settings. The app uses this permission only to send the keystrokes of a snippet you click. It doesn’t use it to read your screen, other apps’ content or your own typing. You can revoke the permission at any time in System Settings.</p>
+    <p>To type text into other apps, macOS requires you to allow {app.name} under Accessibility in System Settings. The app uses this permission only to type your clipboard text when you click its icon. It doesn’t use it to read your screen, other apps’ content or your own typing. You can revoke the permission at any time in System Settings.</p>
     <h3>Crash reports</h3>
     <p>If you choose to share analytics with app developers in macOS settings, Apple may pass us anonymous crash reports. Apple handles that data under its own privacy policy, and we use it only to fix bugs.</p>
     <h3>Purchases</h3>
@@ -48,13 +50,15 @@ const mail = `mailto:${owner.email}`;
 </Base>
 ) : (
 <Base lang="es" route="privacy" title="Política de privacidad | ClickType" description="Cómo tratan tus datos ClickType y esta web: la app no recopila ninguno.">
-  <Prose title="Política de privacidad" updated={`Última actualización: ${date}`} intro={`${app.name} no recopila, almacena ni comparte datos personales. Todo lo que creas en la app se queda en tu Mac.`}>
+  <Prose title="Política de privacidad" updated={`Última actualización: ${date}`} intro={`${app.name} no recopila, almacena ni comparte datos personales. Lo que tienes en el portapapeles se queda en tu Mac.`}>
     <h2>Responsable</h2>
     <p>{app.name} está desarrollada por {owner.legalName}, con el nombre comercial {owner.brand}, {owner.address}, NIF {owner.taxId}. Para cualquier consulta o solicitud sobre privacidad, escribe a <a href={mail}>{owner.email}</a>.</p>
 
     <h2>La app {app.name}</h2>
+    <h3>Cómo usa la app tu portapapeles</h3>
+    <p>{app.name} lee el texto del portapapeles solo en el momento en que haces clic en su icono de la barra de menús. Teclea ese texto en la app que estás usando y después lo descarta. No guarda ninguna copia ni historial, y no vigila el portapapeles en segundo plano. Los elementos que no son texto, como las imágenes, se ignoran.</p>
     <h3>Qué guarda la app</h3>
-    <p>Los fragmentos y ajustes que creas se guardan solo en tu Mac, dentro del almacenamiento propio de la app. Nunca se envían a nosotros ni a terceros. Si eliminas la app, se eliminan.</p>
+    <p>Solo sus propias preferencias, como si debe abrirse al iniciar sesión. Se quedan en tu Mac.</p>
     <h3>Qué no hace la app</h3>
     <ul>
       <li>No recopila datos personales, datos de uso ni identificadores.</li>
@@ -63,7 +67,7 @@ const mail = `mailto:${owner.email}`;
       <li>No registra, lee ni guarda lo que escribes con el teclado.</li>
     </ul>
     <h3>Permiso de accesibilidad</h3>
-    <p>Para escribir texto en otras apps, macOS exige que permitas {app.name} en Accesibilidad, dentro de Ajustes del Sistema. La app usa este permiso solo para enviar las pulsaciones del fragmento en el que haces clic. No lo usa para leer tu pantalla, el contenido de otras apps ni lo que tú escribes. Puedes retirar el permiso cuando quieras en Ajustes del Sistema.</p>
+    <p>Para escribir texto en otras apps, macOS exige que permitas {app.name} en Accesibilidad, dentro de Ajustes del Sistema. La app usa este permiso solo para teclear el texto de tu portapapeles cuando haces clic en su icono. No lo usa para leer tu pantalla, el contenido de otras apps ni lo que tú escribes. Puedes retirar el permiso cuando quieras en Ajustes del Sistema.</p>
     <h3>Informes de fallos</h3>
     <p>Si en los ajustes de macOS eliges compartir análisis con los desarrolladores, Apple puede enviarnos informes de fallos anónimos. Apple trata esos datos según su propia política de privacidad y nosotros los usamos solo para corregir errores.</p>
     <h3>Compras</h3>

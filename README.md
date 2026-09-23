@@ -18,11 +18,12 @@ minimum macOS version and (once live) the App Store URL.
 
 The privacy policy states that the app:
 
-- stores snippets and settings only locally,
+- reads the clipboard only when its menu bar icon is clicked, and keeps no copy or history,
+- stores only its own preferences (e.g. Run at Login), locally,
 - makes no network connections and has no analytics, ads or tracking,
-- uses the Accessibility permission only to send the keystrokes of a clicked snippet.
+- uses the Accessibility permission only to type the clipboard text on that click.
 
-If any of that stops being true (iCloud sync, crash SDK, update checks…), update
+If any of that stops being true (clipboard history, iCloud sync, crash SDK, update checks…), update
 `src/views/Privacy.astro` **and** your App Privacy answers in App Store Connect.
 
 ## Develop

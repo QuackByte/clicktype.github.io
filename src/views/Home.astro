@@ -12,18 +12,18 @@ const es = lang === 'es';
 <Base
   lang={lang}
   route="home"
-  title={es ? 'ClickType: texto tecleado con un clic, para Mac' : 'ClickType: text typed with one click, for Mac'}
+  title={es ? 'ClickType: teclea tu portapapeles con un clic, para Mac' : 'ClickType: type your clipboard with one click, for Mac'}
   description={es
-    ? 'Guarda el texto que repites y ClickType lo teclea por ti con un clic, en cualquier app del Mac.'
-    : 'Save the text you repeat and ClickType types it for you with one click, in any app on your Mac.'}
+    ? 'Copia texto, haz clic en el icono de ClickType en la barra de menús y lo teclea donde esté el cursor, en cualquier app del Mac.'
+    : 'Copy text, click the ClickType icon in the menu bar, and it types it wherever your cursor is, in any app on your Mac.'}
 >
   <section class="hero">
     <div>
-      <h1>{es ? 'Haz clic en un fragmento. ClickType lo escribe.' : 'Click a snippet. ClickType types it.'}</h1>
+      <h1>{es ? 'Copia. Haz clic. ClickType lo escribe.' : 'Copy. Click. ClickType types it.'}</h1>
       <p class="lede">
         {es
-          ? 'Guarda el texto que escribes una y otra vez. Con un clic, ClickType lo teclea, tecla a tecla, en la app que estés usando.'
-          : 'Save the text you type again and again. One click, and ClickType types it, key by key, into whatever app you’re using.'}
+          ? 'Un clic en el icono de la barra de menús y ClickType teclea lo que tengas en el portapapeles, tecla a tecla, donde esté el cursor.'
+          : 'One click on the menu bar icon, and ClickType types whatever’s on your clipboard, key by key, wherever your cursor is.'}
       </p>
       <StoreButton lang={lang} />
       <p class="meta">{es ? `Para macOS ${app.minMacOS} o posterior.` : `For macOS ${app.minMacOS} or later.`}</p>
@@ -35,12 +35,12 @@ const es = lang === 'es';
     <h2 id="how">{es ? 'Cómo funciona' : 'How it works'}</h2>
     <ol class="steps">
       <li>
-        <h3>{es ? 'Guarda un fragmento' : 'Save a snippet'}</h3>
-        <p>{es ? 'Añade el texto que reutilizas: un email, una dirección, una respuesta habitual.' : 'Add the text you reuse: an email, an address, a reply you send every week.'}</p>
+        <h3>{es ? 'Copia el texto' : 'Copy some text'}</h3>
+        <p>{es ? 'Cópialo como siempre, con ⌘C o desde el menú Edición. Sirve cualquier texto.' : 'Copy it as usual, with ⌘C or from the Edit menu. Any plain text works.'}</p>
       </li>
       <li>
-        <h3>{es ? 'Haz clic' : 'Click it'}</h3>
-        <p>{es ? 'Coloca el cursor donde debe ir el texto y haz clic en el fragmento en ClickType.' : 'Put the cursor where the text should go, then click the snippet in ClickType.'}</p>
+        <h3>{es ? 'Haz clic en el icono' : 'Click the icon'}</h3>
+        <p>{es ? 'Coloca el cursor donde debe ir el texto y haz clic en la tecla de ClickType en la barra de menús.' : 'Put the cursor where the text should go, then click the ClickType keycap in the menu bar.'}</p>
       </li>
       <li>
         <h3>{es ? 'Se escribe solo' : 'It’s typed for you'}</h3>
@@ -65,7 +65,7 @@ const es = lang === 'es';
       <div>
         <h3>{es ? 'Se queda en tu Mac' : 'Stays on your Mac'}</h3>
         <p>
-          {es ? 'Tus fragmentos se guardan en local. ClickType no recopila ni envía datos. ' : 'Your snippets are stored locally. ClickType doesn’t collect or send any data. '}
+          {es ? 'ClickType lee el portapapeles solo cuando haces clic en el icono y no guarda ninguna copia. No recopila ni envía datos. ' : 'ClickType reads the clipboard only when you click its icon, and keeps no copy. It doesn’t collect or send any data. '}
           <a href={href('privacy', lang)}>{es ? 'Política de privacidad' : 'Privacy policy'}</a>
         </p>
       </div>
