@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import Prose from '../components/Prose.astro';
+import { app, owner } from '../config';
+import { href, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const mail = `mailto:${owner.email}?subject=${encodeURIComponent(app.name + (lang === 'es' ? ' – soporte' : ' support'))}`;
+---
+{lang === 'en' ? (
+<Base lang="en" route="support" title="Support | ClickType" description="Get help with ClickType: setup, permissions and contact.">
+  <Prose title="Support" intro={`Something not working, or an idea for ${app.name}? Email us and you’ll get a reply from the person who builds it.`}>
+    <div class="contact">
+      <p><a href={mail}>{owner.email}</a></p>
+    </div>
+    <p>It helps to include your macOS version, the {app.name} version (in the app’s About window) and the app you were typing into.</p>
+
+    <h2>Common questions</h2>
+    <details>
+      <summary>How do I give {app.name} permission to type?</summary>
+      <p>Open System Settings, go to <span class="path">Privacy &amp; Security › Accessibility</span> and turn on {app.name}. If it’s already on but typing doesn’t work, turn it off and on again, then relaunch {app.name}.</p>
+    </details>
+    <details>
+      <summary>I clicked a snippet and nothing was typed.</summary>
+      <p>{app.name} types into whatever has keyboard focus. Click into the text field first so the cursor is blinking there, then click your snippet. Also check that the Accessibility permission above is on.</p>
+    </details>
+    <details>
+      <summary>Is my text sent anywhere?</summary>
+      <p>No. Snippets stay on your Mac and the app makes no network connections. The <a href={href('privacy', 'en')}>privacy policy</a> has the details.</p>
+    </details>
+    <details>
+      <summary>How do I remove {app.name} and its data?</summary>
+      <p>Quit the app and move it from Applications to the Bin. Its snippets and settings are removed with it. You can also remove it from the Accessibility list in System Settings.</p>
+    </details>
+    <details>
+      <summary>How do I get a refund?</summary>
+      <p>Purchases are handled by Apple, so refunds are too. Request one at <a href="https://reportaproblem.apple.com/">reportaproblem.apple.com</a>.</p>
+    </details>
+  </Prose>
+</Base>
+) : (
+<Base lang="es" route="support" title="Soporte | ClickType" description="Ayuda con ClickType: configuración, permisos y contacto.">
+  <Prose title="Soporte" intro={`¿Algo no funciona o tienes una idea para ${app.name}? Escríbenos y te responderá quien la desarrolla.`}>
+    <div class="contact">
+      <p><a href={mail}>{owner.email}</a></p>
+    </div>
+    <p>Ayuda que incluyas tu versión de macOS, la versión de {app.name} (en la ventana Acerca de) y la app en la que estabas escribiendo.</p>
+
+    <h2>Preguntas frecuentes</h2>
+    <details>
+      <summary>¿Cómo doy permiso a {app.name} para escribir?</summary>
+      <p>Abre Ajustes del Sistema, ve a <span class="path">Privacidad y seguridad › Accesibilidad</span> y activa {app.name}. Si ya está activado pero no escribe, desactívalo y vuelve a activarlo, y abre {app.name} de nuevo.</p>
+    </details>
+    <details>
+      <summary>He hecho clic en un fragmento y no se ha escrito nada.</summary>
+      <p>{app.name} escribe donde esté el foco del teclado. Haz clic primero en el campo de texto para que el cursor parpadee ahí y luego en el fragmento. Comprueba también que el permiso de Accesibilidad está activado.</p>
+    </details>
+    <details>
+      <summary>¿Se envía mi texto a algún sitio?</summary>
+      <p>No. Los fragmentos se quedan en tu Mac y la app no se conecta a internet. Tienes los detalles en la <a href={href('privacy', 'es')}>política de privacidad</a>.</p>
+    </details>
+    <details>
+      <summary>¿Cómo elimino {app.name} y sus datos?</summary>
+      <p>Cierra la app y arrástrala de Aplicaciones a la Papelera. Sus fragmentos y ajustes se eliminan con ella. También puedes quitarla de la lista de Accesibilidad en Ajustes del Sistema.</p>
+    </details>
+    <details>
+      <summary>¿Cómo pido un reembolso?</summary>
+      <p>Apple gestiona las compras y también los reembolsos. Puedes solicitarlo en <a href="https://reportaproblem.apple.com/">reportaproblem.apple.com</a>.</p>
+    </details>
+  </Prose>
+</Base>
+)}

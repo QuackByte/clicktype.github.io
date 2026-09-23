@@ -1,0 +1,20 @@
+---
+import { app } from '../config';
+import { href, asset, ui, type Lang, type Route } from '../i18n';
+
+interface Props { lang: Lang; route: Route }
+const { lang, route } = Astro.props;
+const other: Lang = lang === 'en' ? 'es' : 'en';
+const t = ui[lang];
+---
+<header class="site-header">
+  <a class="brand" href={href('home', lang)}>
+    <img src={asset('app-icon.svg')} alt="" width="36" height="36" />
+    <span>{app.name}</span>
+  </a>
+  <nav aria-label={lang === 'es' ? 'Principal' : 'Main'}>
+    <a href={href('support', lang)} aria-current={route === 'support' ? 'page' : undefined}>{t.nav.support}</a>
+    <a href={href('privacy', lang)} aria-current={route === 'privacy' ? 'page' : undefined}>{t.nav.privacy}</a>
+    <a href={href(route, other)} hreflang={other} lang={other} aria-label={t.switchLabel}>{t.switchTo}</a>
+  </nav>
+</header>

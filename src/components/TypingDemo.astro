@@ -1,0 +1,75 @@
+---
+import type { Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+const snippets = lang === 'es'
+  ? [
+      { label: 'Email', text: 'alex@example.com' },
+      { label: 'Dirección', text: 'Calle Larios 12, 29005 Málaga' },
+      { label: 'Respuesta', text: 'Gracias por escribir. Te respondo en un día laborable.' },
+    ]
+  : [
+      { label: 'Email', text: 'alex@example.com' },
+      { label: 'Address', text: 'Calle Larios 12, 29005 Málaga' },
+      { label: 'Reply', text: 'Thanks for reaching out. I’ll get back to you within one business day.' },
+    ];
+
+const t = lang === 'es'
+  ? { field: 'Un campo de texto en cualquier app', hint: 'Prueba: haz clic en un fragmento.', clear: 'Borrar', group: 'Fragmentos de ejemplo' }
+  : { field: 'A text field in any app', hint: 'Try it: click a snippet.', clear: 'Clear', group: 'Example snippets' };
+---
+<div class="demo" data-demo>
+  <div class="demo-window">
+    <div class="demo-bar">
+      <span class="demo-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="demo-title">{t.field}</span>
+      <button type="button" class="demo-clear" data-clear>{t.clear}</button>
+    </div>
+    <p class="demo-field" data-output aria-live="polite"><span data-text></span><span class="caret" aria-hidden="true"></span></p>
+  </div>
+  <p class="demo-hint">{t.hint}</p>
+  <div class="keys" role="group" aria-label={t.group}>
+    {snippets.map((s) => (
+      <button type="button" class="key" data-snippet={s.text}>{s.label}</button>
+    ))}
+  </div>
+</div>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  for (const demo of document.querySelectorAll<HTMLElement>('[data-demo]')) {
+    const out = demo.querySelector<HTMLElement>('[data-text]');
+    const field = demo.querySelector<HTMLElement>('[data-output]');
+    if (!out || !field) continue;
+    let run = 0;
+
+    const type = async (text: string) => {
+      const id = ++run;
+      field.classList.add('is-typing');
+      const prefix = out.textContent ? ' ' : '';
+      const chars = [...(prefix + text)];
+      if (reduce.matches) {
+        out.textContent += chars.join('');
+      } else {
+        for (const ch of chars) {
+          if (id !== run) return;
+          out.textContent += ch;
+          await new Promise((r) => setTimeout(r, 18 + Math.random() * 34));
+        }
+      }
+      if (id === run) field.classList.remove('is-typing');
+    };
+
+    demo.querySelectorAll<HTMLButtonElement>('[data-snippet]').forEach((btn) =>
+      btn.addEventListener('click', () => type(btn.dataset.snippet ?? '')),
+    );
+    demo.querySelector('[data-clear]')?.addEventListener('click', () => {
+      run++;
+      out.textContent = '';
+      field.classList.remove('is-typing');
+    });
+  }
+</script>

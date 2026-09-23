@@ -1,0 +1,14 @@
+---
+import { app } from '../config';
+import type { Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const live = app.appStoreUrl.length > 0;
+const label = live
+  ? lang === 'es' ? 'Descargar en el Mac App Store' : 'Download on the Mac App Store'
+  : lang === 'es' ? 'Próximamente en el Mac App Store' : 'Coming soon to the Mac App Store';
+---
+{live
+  ? <a class="store" href={app.appStoreUrl}>{label}</a>
+  : <p class="store store--soon">{label}</p>}

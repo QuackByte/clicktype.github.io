@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+import TypingDemo from '../components/TypingDemo.astro';
+import StoreButton from '../components/StoreButton.astro';
+import { app } from '../config';
+import { href, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const es = lang === 'es';
+---
+<Base
+  lang={lang}
+  route="home"
+  title={es ? 'ClickType: texto tecleado con un clic, para Mac' : 'ClickType: text typed with one click, for Mac'}
+  description={es
+    ? 'Guarda el texto que repites y ClickType lo teclea por ti con un clic, en cualquier app del Mac.'
+    : 'Save the text you repeat and ClickType types it for you with one click, in any app on your Mac.'}
+>
+  <section class="hero">
+    <div>
+      <h1>{es ? 'Haz clic en un fragmento. ClickType lo escribe.' : 'Click a snippet. ClickType types it.'}</h1>
+      <p class="lede">
+        {es
+          ? 'Guarda el texto que escribes una y otra vez. Con un clic, ClickType lo teclea, tecla a tecla, en la app que estés usando.'
+          : 'Save the text you type again and again. One click, and ClickType types it, key by key, into whatever app you’re using.'}
+      </p>
+      <StoreButton lang={lang} />
+      <p class="meta">{es ? `Para macOS ${app.minMacOS} o posterior.` : `For macOS ${app.minMacOS} or later.`}</p>
+    </div>
+    <TypingDemo lang={lang} />
+  </section>
+
+  <section class="band" aria-labelledby="how">
+    <h2 id="how">{es ? 'Cómo funciona' : 'How it works'}</h2>
+    <ol class="steps">
+      <li>
+        <h3>{es ? 'Guarda un fragmento' : 'Save a snippet'}</h3>
+        <p>{es ? 'Añade el texto que reutilizas: un email, una dirección, una respuesta habitual.' : 'Add the text you reuse: an email, an address, a reply you send every week.'}</p>
+      </li>
+      <li>
+        <h3>{es ? 'Haz clic' : 'Click it'}</h3>
+        <p>{es ? 'Coloca el cursor donde debe ir el texto y haz clic en el fragmento en ClickType.' : 'Put the cursor where the text should go, then click the snippet in ClickType.'}</p>
+      </li>
+      <li>
+        <h3>{es ? 'Se escribe solo' : 'It’s typed for you'}</h3>
+        <p>{es ? 'ClickType envía el texto como pulsaciones de teclado, como si lo escribieras tú.' : 'ClickType sends the text as keystrokes, as if you were typing it yourself.'}</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="band" aria-labelledby="why">
+    <h2 id="why">{es ? 'Tecleado, no pegado' : 'Typed, not pasted'}</h2>
+    <div class="points">
+      <div>
+        <h3>{es ? 'Funciona donde pegar no' : 'Works where paste doesn’t'}</h3>
+        <p>{es
+          ? 'Algunos formularios, escritorios remotos y consolas de máquinas virtuales bloquean o ignoran el pegado. Las pulsaciones sí llegan.'
+          : 'Some forms, remote desktops and virtual machine consoles block or ignore paste. Keystrokes get through.'}</p>
+      </div>
+      <div>
+        <h3>{es ? 'No toca tu portapapeles' : 'Leaves your clipboard alone'}</h3>
+        <p>{es ? 'Lo que hayas copiado sigue ahí después de que ClickType escriba.' : 'Whatever you copied is still there after ClickType types.'}</p>
+      </div>
+      <div>
+        <h3>{es ? 'Se queda en tu Mac' : 'Stays on your Mac'}</h3>
+        <p>
+          {es ? 'Tus fragmentos se guardan en local. ClickType no recopila ni envía datos. ' : 'Your snippets are stored locally. ClickType doesn’t collect or send any data. '}
+          <a href={href('privacy', lang)}>{es ? 'Política de privacidad' : 'Privacy policy'}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
