@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Prose from '../components/Prose.astro';
 import { app, owner } from '../config';
 import { href, type Lang } from '../i18n';
+import { releasesUrl, repoUrl } from '../release';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -16,7 +17,17 @@ const mail = `mailto:${owner.email}?subject=${encodeURIComponent(app.name + (lan
     </div>
     <p>It helps to include your macOS version, the {app.name} version (in the app’s About window) and the app you were typing into.</p>
 
+    <p>Found a bug or have an idea? You can also <a href={`${repoUrl}/issues`}>open an issue on GitHub</a>.</p>
+
     <h2>Common questions</h2>
+    <details>
+      <summary>How do I install {app.name}?</summary>
+      <p>Download the latest zip from the <a href={releasesUrl}>releases page</a>, open it, and move <span class="path">ClickType.app</span> to your Applications folder. Open it and its keycap icon appears in the menu bar. {app.name} needs macOS {app.minMacOS} or later on a Mac with Apple silicon.</p>
+    </details>
+    <details>
+      <summary>How do I update {app.name}?</summary>
+      <p>Quit {app.name} (right-click its icon › Quit), download the latest release and replace the copy in Applications. If typing stops working after an update, turn {app.name} off and on again under Accessibility.</p>
+    </details>
     <details>
       <summary>How do I give {app.name} permission to type?</summary>
       <p>Open System Settings, go to <span class="path">Privacy &amp; Security › Accessibility</span> and turn on {app.name}. If it’s already on but typing doesn’t work, turn it off and on again, then relaunch {app.name}.</p>
@@ -42,8 +53,8 @@ const mail = `mailto:${owner.email}?subject=${encodeURIComponent(app.name + (lan
       <p>Quit the app and move it from Applications to the Bin. It keeps no copy of your clipboard, so there’s nothing else to delete. You can also remove it from the Accessibility list in System Settings.</p>
     </details>
     <details>
-      <summary>How do I get a refund?</summary>
-      <p>Purchases are handled by Apple, so refunds are too. Request one at <a href="https://reportaproblem.apple.com/">reportaproblem.apple.com</a>.</p>
+      <summary>Is {app.name} free?</summary>
+      <p>Yes. It’s free and open source under the {app.license} license. The code is on <a href={repoUrl}>GitHub</a>, and each release is signed with a Developer ID and notarized by Apple.</p>
     </details>
   </Prose>
 </Base>
@@ -55,7 +66,17 @@ const mail = `mailto:${owner.email}?subject=${encodeURIComponent(app.name + (lan
     </div>
     <p>Ayuda que incluyas tu versión de macOS, la versión de {app.name} (en la ventana Acerca de) y la app en la que estabas escribiendo.</p>
 
+    <p>¿Has encontrado un error o tienes una idea? También puedes <a href={`${repoUrl}/issues`}>abrir una incidencia en GitHub</a>.</p>
+
     <h2>Preguntas frecuentes</h2>
+    <details>
+      <summary>¿Cómo instalo {app.name}?</summary>
+      <p>Descarga el zip más reciente desde la <a href={releasesUrl}>página de versiones</a>, ábrelo y mueve <span class="path">ClickType.app</span> a tu carpeta Aplicaciones. Ábrela y su icono de tecla aparecerá en la barra de menús. {app.name} necesita macOS {app.minMacOS} o posterior en un Mac con Apple silicon.</p>
+    </details>
+    <details>
+      <summary>¿Cómo actualizo {app.name}?</summary>
+      <p>Cierra {app.name} (clic derecho en su icono › Salir), descarga la última versión y sustituye la copia de Aplicaciones. Si deja de escribir tras actualizar, desactiva y vuelve a activar {app.name} en Accesibilidad.</p>
+    </details>
     <details>
       <summary>¿Cómo doy permiso a {app.name} para escribir?</summary>
       <p>Abre Ajustes del Sistema, ve a <span class="path">Privacidad y seguridad › Accesibilidad</span> y activa {app.name}. Si ya está activado pero no escribe, desactívalo y vuelve a activarlo, y abre {app.name} de nuevo.</p>
@@ -81,8 +102,8 @@ const mail = `mailto:${owner.email}?subject=${encodeURIComponent(app.name + (lan
       <p>Cierra la app y arrástrala de Aplicaciones a la Papelera. No guarda ninguna copia de tu portapapeles, así que no hay nada más que borrar. También puedes quitarla de la lista de Accesibilidad en Ajustes del Sistema.</p>
     </details>
     <details>
-      <summary>¿Cómo pido un reembolso?</summary>
-      <p>Apple gestiona las compras y también los reembolsos. Puedes solicitarlo en <a href="https://reportaproblem.apple.com/">reportaproblem.apple.com</a>.</p>
+      <summary>¿{app.name} es gratis?</summary>
+      <p>Sí. Es gratuita y de código abierto con licencia {app.license}. El código está en <a href={repoUrl}>GitHub</a>, y cada versión está firmada con un Developer ID y notarizada por Apple.</p>
     </details>
   </Prose>
 </Base>

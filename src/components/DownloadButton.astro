@@ -1,0 +1,54 @@
+---
+import { app } from '../config';
+import { latestRelease, releasesUrl, repoUrl } from '../release';
+import type { Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const es = lang === 'es';
+const release = await latestRelease();
+const kb = (bytes: number) => `${Math.round(bytes / 1024)} KB`;
+
+const t = es
+  ? { download: 'Descargar ClickType', source: 'Código en GitHub', notes: 'Notas de la versión', checksum: 'SHA-256' }
+  : { download: 'Download ClickType', source: 'Source on GitHub', notes: 'Release notes', checksum: 'SHA-256' };
+---
+<div class="download" data-release={app.repo}>
+  <div class="download-actions">
+    <a class="store" href={release?.url ?? releasesUrl} data-download>
+      {t.download}<span data-version>{release ? ` ${release.version}` : ''}</span>
+    </a>
+    <a class="store store--ghost" href={repoUrl}>{t.source}</a>
+  </div>
+  <p class="meta">
+    {es
+      ? `Gratis y de código abierto (${app.license}). macOS ${app.minMacOS} o posterior, Mac con Apple silicon. Firmada y notarizada por Apple.`
+      : `Free and open source (${app.license}). macOS ${app.minMacOS} or later, Apple silicon Macs. Signed and notarized by Apple.`}
+  </p>
+  <p class="meta">
+    <span data-size>{release?.size ? `${kb(release.size)} · ` : ''}</span><a href={releasesUrl} data-notes>{t.notes}</a><span data-checksum hidden={!release?.checksumUrl}> · <a href={release?.checksumUrl ?? releasesUrl}>{t.checksum}</a></span>
+  </p>
+</div>
+
+<script>
+  // Keep the button on the newest release even if the site hasn't been rebuilt since.
+  for (const el of document.querySelectorAll<HTMLElement>('[data-release]')) {
+    fetch(`https://api.github.com/repos/${el.dataset.release}/releases/latest`, {
+      headers: { Accept: 'application/vnd.github+json' },
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: { tag_name: string; html_url: string; assets: { name: string; browser_download_url: string; size: number }[] } | null) => {
+        const zip = data?.assets.find((a) => /-macOS\.zip$/.test(a.name));
+        if (!data || !zip) return;
+        const sum = data.assets.find((a) => /-macOS\.zip\.sha256$/.test(a.name));
+        el.querySelector<HTMLAnchorElement>('[data-download]')!.href = zip.browser_download_url;
+        el.querySelector('[data-version]')!.textContent = ` ${data.tag_name.replace(/^v/, '')}`;
+        el.querySelector('[data-size]')!.textContent = `${Math.round(zip.size / 1024)} KB · `;
+        el.querySelector<HTMLAnchorElement>('[data-notes]')!.href = data.html_url;
+        const check = el.querySelector<HTMLElement>('[data-checksum]')!;
+        check.hidden = !sum;
+        if (sum) check.querySelector('a')!.href = sum.browser_download_url;
+      })
+      .catch(() => {});
+  }
+</script>

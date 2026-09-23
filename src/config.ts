@@ -3,8 +3,9 @@
 
 export const app = {
   name: 'ClickType',
-  /** Mac App Store URL. Leave empty until the listing is live. */
-  appStoreUrl: '', // TODO
+  /** Open-source repo. Downloads come from its GitHub Releases. */
+  repo: 'QuackByte/clicktype',
+  license: 'MIT',
   /** Minimum macOS version, e.g. '14.0'. */
   minMacOS: '13.0',
 };

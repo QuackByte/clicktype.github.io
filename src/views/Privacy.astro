@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Prose from '../components/Prose.astro';
 import { app, owner, privacyUpdated } from '../config';
 import { href, formatDate, type Lang } from '../i18n';
+import { repoUrl } from '../release';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -29,10 +30,8 @@ const mail = `mailto:${owner.email}`;
     </ul>
     <h3>Accessibility permission</h3>
     <p>To type text into other apps, macOS requires you to allow {app.name} under Accessibility in System Settings. The app uses this permission only to type your clipboard text when you click its icon. It doesn’t use it to read your screen, other apps’ content or your own typing. You can revoke the permission at any time in System Settings.</p>
-    <h3>Crash reports</h3>
-    <p>If you choose to share analytics with app developers in macOS settings, Apple may pass us anonymous crash reports. Apple handles that data under its own privacy policy, and we use it only to fix bugs.</p>
-    <h3>Purchases</h3>
-    <p>{app.name} is sold through the Mac App Store. Apple processes your purchase and payment, and we don’t receive your name, email or payment details. See <a href="https://www.apple.com/legal/privacy/">Apple’s privacy policy</a>.</p>
+    <h3>Downloads and source code</h3>
+    <p>{app.name} is free and open source, and you can check everything above in its <a href={repoUrl}>source code</a>. It’s downloaded from GitHub Releases, so GitHub processes your download request as described in the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub General Privacy Statement</a>. We only see aggregate download counts, never who downloaded it. If you open an issue on GitHub, it’s public and handled by GitHub under the same statement.</p>
 
     <h2>This website</h2>
     <p>This website doesn’t use cookies, analytics or trackers, and its fonts are served from the same place as the site. It is hosted on GitHub Pages. When you visit, GitHub may process your IP address in server logs for security and to deliver the site, as described in the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub General Privacy Statement</a>.</p>
@@ -68,10 +67,8 @@ const mail = `mailto:${owner.email}`;
     </ul>
     <h3>Permiso de accesibilidad</h3>
     <p>Para escribir texto en otras apps, macOS exige que permitas {app.name} en Accesibilidad, dentro de Ajustes del Sistema. La app usa este permiso solo para teclear el texto de tu portapapeles cuando haces clic en su icono. No lo usa para leer tu pantalla, el contenido de otras apps ni lo que tú escribes. Puedes retirar el permiso cuando quieras en Ajustes del Sistema.</p>
-    <h3>Informes de fallos</h3>
-    <p>Si en los ajustes de macOS eliges compartir análisis con los desarrolladores, Apple puede enviarnos informes de fallos anónimos. Apple trata esos datos según su propia política de privacidad y nosotros los usamos solo para corregir errores.</p>
-    <h3>Compras</h3>
-    <p>{app.name} se vende a través del Mac App Store. Apple gestiona la compra y el pago, y nosotros no recibimos tu nombre, email ni datos de pago. Consulta la <a href="https://www.apple.com/es/legal/privacy/">política de privacidad de Apple</a>.</p>
+    <h3>Descargas y código fuente</h3>
+    <p>{app.name} es gratuita y de código abierto, y puedes comprobar todo lo anterior en su <a href={repoUrl}>código fuente</a>. Se descarga desde GitHub Releases, así que GitHub trata tu solicitud de descarga según la <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">declaración de privacidad de GitHub</a>. Nosotros solo vemos el número total de descargas, nunca quién ha descargado la app. Si abres una incidencia en GitHub, es pública y GitHub la gestiona según esa misma declaración.</p>
 
     <h2>Esta web</h2>
     <p>Esta web no usa cookies, analítica ni rastreadores, y sus fuentes se sirven desde el mismo sitio. Está alojada en GitHub Pages. Cuando la visitas, GitHub puede tratar tu dirección IP en los registros del servidor por seguridad y para servir la web, como se describe en la <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">declaración de privacidad de GitHub</a>.</p>

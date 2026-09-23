@@ -13,8 +13,12 @@ GitHub Pages at **https://quackbyte.dev/clicktype/**.
 
 ## Before publishing
 
-Fill in every `TODO` in `src/config.ts`: legal name, NIF, business address, support email,
-minimum macOS version and (once live) the App Store URL.
+Fill in every `TODO` in `src/config.ts`: legal name, NIF, business address and support email.
+
+The download button points at the latest release of the open-source app
+([QuackByte/clicktype](https://github.com/QuackByte/clicktype/releases)). It's resolved from the
+GitHub API at build time (`src/release.ts`) and refreshed in the browser, so a new release shows
+up without a redeploy. Release assets must keep the `ClickType-<version>-macOS.zip` naming.
 
 The privacy policy states that the app:
 
@@ -24,7 +28,7 @@ The privacy policy states that the app:
 - uses the Accessibility permission only to type the clipboard text on that click.
 
 If any of that stops being true (clipboard history, iCloud sync, crash SDK, update checks…), update
-`src/views/Privacy.astro` **and** your App Privacy answers in App Store Connect.
+`src/views/Privacy.astro` **and** the app's own README.
 
 ## Develop
 
@@ -50,10 +54,3 @@ This repo (`QuackByte/clicktype.github.io`) is not its own GitHub Pages site. Th
   gh workflow run deploy.yml -R QuackByte/quackbyte.github.io
   ```
 - This repo must stay public: the org workflow checks it out without a token.
-
-## App Store Connect
-
-- Privacy Policy URL: `https://quackbyte.dev/clicktype/privacy/`
-- Support URL: `https://quackbyte.dev/clicktype/support/`
-- Marketing URL: `https://quackbyte.dev/clicktype/`
-- App Privacy: "Data Not Collected" (matches the policy above)

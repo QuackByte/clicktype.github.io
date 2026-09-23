@@ -1,8 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import TypingDemo from '../components/TypingDemo.astro';
-import StoreButton from '../components/StoreButton.astro';
-import { app } from '../config';
+import DownloadButton from '../components/DownloadButton.astro';
 import { href, type Lang } from '../i18n';
 
 interface Props { lang: Lang }
@@ -25,8 +24,7 @@ const es = lang === 'es';
           ? 'Un clic en el icono de la barra de menús y ClickType teclea lo que tengas en el portapapeles, tecla a tecla, donde esté el cursor.'
           : 'One click on the menu bar icon, and ClickType types whatever’s on your clipboard, key by key, wherever your cursor is.'}
       </p>
-      <StoreButton lang={lang} />
-      <p class="meta">{es ? `Para macOS ${app.minMacOS} o posterior.` : `For macOS ${app.minMacOS} or later.`}</p>
+      <DownloadButton lang={lang} />
     </div>
     <TypingDemo lang={lang} />
   </section>
@@ -65,7 +63,7 @@ const es = lang === 'es';
       <div>
         <h3>{es ? 'Se queda en tu Mac' : 'Stays on your Mac'}</h3>
         <p>
-          {es ? 'ClickType lee el portapapeles solo cuando haces clic en el icono y no guarda ninguna copia. No recopila ni envía datos. ' : 'ClickType reads the clipboard only when you click its icon, and keeps no copy. It doesn’t collect or send any data. '}
+          {es ? 'ClickType lee el portapapeles solo cuando haces clic en el icono y no guarda ninguna copia. No recopila ni envía datos, y su código es abierto para que lo compruebes. ' : 'ClickType reads the clipboard only when you click its icon, and keeps no copy. It doesn’t collect or send any data, and its code is open for you to check. '}
           <a href={href('privacy', lang)}>{es ? 'Política de privacidad' : 'Privacy policy'}</a>
         </p>
       </div>
