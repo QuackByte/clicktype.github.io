@@ -6,7 +6,7 @@ export const app = {
   /** Mac App Store URL. Leave empty until the listing is live. */
   appStoreUrl: '', // TODO
   /** Minimum macOS version, e.g. '14.0'. */
-  minMacOS: '[MIN MACOS VERSION]', // TODO
+  minMacOS: '13.0',
 };
 
 export const owner = {
